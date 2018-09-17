@@ -76,4 +76,9 @@ Route::group(['prefix'=>'admin'], function(){
 		Route::get('sua', 'UserController@excSua');
 	});
 
+	Route::group(['prefix'=>'ajax'], function(){
+		// admin/ajax/...
+		Route::get('loaitin/{idTheLoai}', 'AjaxController@getLoaiTin');
+	});
+
 });
