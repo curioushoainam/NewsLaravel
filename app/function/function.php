@@ -112,4 +112,17 @@ function message($msg){
     return $html;
 }
 
+function error($err){
+	// the function shows err on the browser
+	// input : string $err
+	// output: html code displays message
+	$html = '';
+	if(isset($err) && $err ){ 
+		$html .= '<div class="alert alert-danger">';           
+        $html .= $err;            
+        $html .= '</div>';
+	}
+    return $html;
+}
+
 ?>

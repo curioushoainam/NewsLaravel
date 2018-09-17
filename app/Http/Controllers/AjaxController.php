@@ -17,5 +17,20 @@ class AjaxController extends Controller
             echo "<option value='". $lt->id ."'>". $lt->Ten ."</option>";        
     }
 
+     public function getXoaTinTuc($delID){ 
+     	if(isset($delID) && $delID) {
+     		$tintuc = TinTuc::find($delID); 
+	        // $file = 'public/upload/tintuc/'.$tintuc->Hinh;
+	        // if (file_exists($file)) {
+	        //     unlink($file);
+	        // } 
+	        // $tintuc->delete();        
+	        echo json_encode(array('result'=>'done'));
+     	} else {
+     		echo json_encode(array('result'=>'failed'));
+     	}
+                
+    }
+
     
 }

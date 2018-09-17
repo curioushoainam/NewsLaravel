@@ -57,6 +57,9 @@
     <script src="public/admin_asset/bower_components/DataTables/media/js/jquery.dataTables.min.js"></script>
     <script src="public/admin_asset/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
 
+    <!-- CK editor - HNHD -->
+    <script type="text/javascript" language="javascript" src="public/admin_asset/ckeditor/ckeditor.js" ></script>
+
     <!-- Page-Level Demo Scripts - Tables - Use for reference -->
     <script>
     $(document).ready(function() {
@@ -65,7 +68,7 @@
         });
     });
     </script>
-
+    
     @yield('script')
 
 </body>

@@ -14,7 +14,12 @@
             </div>
             <!-- /.col-lg-12 -->
             <div class="col-lg-7" style="padding-bottom:120px">
-                <form action="" method="POST">
+                {!! errAlert( $errors->all() ) !!}
+                
+                {!! message( session('msg') ) !!}
+
+                <form action="admin/tintuc/them" method="POST" enctype="multipart/form-data">
+                    <input type="hidden" name="_token" value="{{csrf_token()}}">
                     <div class="form-group">
                         <label>Thể loại</label>
                         <select class="form-control" name="TheLoai" id="TheLoai">
@@ -33,33 +38,38 @@
                         </select>
                     </div>
 
+                    <div class="form-group">
+                        <label>Tiêu đề</label>
+                        <input type="text" name="TieuDe" class="form-control" placeholder="Nhập tiêu đề">
+                    </div>
 
                     <div class="form-group">
-                        <label>Category Name</label>
-                        <input class="form-control" name="txtCateName" placeholder="Please Enter Category Name" />
+                        <label>Tóm tắt</label>
+                        <textarea name="TomTat" id="demo" class="form-control ckeditor" rows="3"></textarea>
                     </div>
+
                     <div class="form-group">
-                        <label>Category Order</label>
-                        <input class="form-control" name="txtOrder" placeholder="Please Enter Category Order" />
+                        <label>Nội dung</label>
+                        <textarea name="NoiDung" id="demo" class="form-control ckeditor" rows="3"></textarea>
                     </div>
+                   
                     <div class="form-group">
-                        <label>Category Keywords</label>
-                        <input class="form-control" name="txtOrder" placeholder="Please Enter Category Keywords" />
+                        <label>Hình</label>
+                        <input name="Hinh" type="file">
                     </div>
+                     {!! error( session('error') ) !!}
+
                     <div class="form-group">
-                        <label>Category Description</label>
-                        <textarea class="form-control" rows="3"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label>Category Status</label>
+                        <label>Nổi bật:</label>
+                        &nbsp&nbsp&nbsp
                         <label class="radio-inline">
-                            <input name="rdoStatus" value="1" checked="" type="radio">Visible
+                            <input name="NoiBat" value="0" checked="" type="radio">Không
                         </label>
                         <label class="radio-inline">
-                            <input name="rdoStatus" value="2" type="radio">Invisible
+                            <input name="NoiBat" value="1" type="radio">Có
                         </label>
                     </div>
-                    <button type="submit" class="btn btn-default">Category Add</button>
+                    <button type="submit" class="btn btn-default">Submit</button>
                     <button type="reset" class="btn btn-default">Reset</button>
                 <form>
             </div>

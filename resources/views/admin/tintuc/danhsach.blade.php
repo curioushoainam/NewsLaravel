@@ -11,6 +11,9 @@
                 </h1>
             </div>
             <!-- /.col-lg-12 -->
+
+            {!! message(session('msg')) !!}                       
+
             <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                 <thead>
                     <tr align="center">
@@ -27,7 +30,7 @@
                 </thead>
                 <tbody>
                     @foreach ($tintuc as $item)
-                    <tr class="odd gradeX" align="center">
+                    <tr class="odd gradeX" align="center" id="tr{{$item->id}}">
                         <td>{{$item->id}}</td>                        
                         <td>
                             <p>{{$item->TieuDe}}</p>
@@ -44,14 +47,15 @@
                             @endif
                         </td>
                         <td>{{$item->SoLuotXem}}</td>                        
-                        <td class="center">
+                       {{--  <td class="center">
                             <form method="post" action="admin/tintuc/xoa" style="display:inline" onsubmit="return confirm('Bạn muốn xóa item {{$item->id}} không ?')" >
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                                 <input name="delID" value="{{$item->id}}" hidden>
                                 <button class="btn btn-primary btn-sm" type="submit">Delete</button>
                             </form>
-                        </td>
-                        <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="admin/tintuc/xoa/{{$item->id}}">Edit</a></td>
+                        </td> --}}
+                        <td><button class="btn btn-primary btn-sm deltt" data-delid="{{$item->id}}" type="button" >Delete</button></td>
+                        <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="admin/tintuc/sua/{{$item->id}}">Edit</a></td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -62,5 +66,25 @@
     <!-- /.container-fluid -->
 </div>
 <!-- /#page-wrapper -->
+
+@endsection
+
+@section('script')
+    <script>
+        $(document).ready(function(){
+            $(document).on('click','.deltt',function(){
+                _that = $(this);
+                var delID = _that.data('delid');
+                // alert(delID);
+                $.get("./admin/ajax/xoatintuc/"+ delID, function(data){
+                    _data = JSON.parse(data);
+                    if(_data.result = "done")
+                        $("#tr"+delID).remove();
+                    else
+                        alert('Delete #id '+delID+' thất bại.' );
+                });
+            });            
+        });
+    </script>
 
 @endsection
