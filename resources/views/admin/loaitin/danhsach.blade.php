@@ -33,9 +33,9 @@
                             <td>{{$item->theloai->Ten}}</td>
                             {{-- <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="admin/theloai/xoa/{{$item->id}}" > Delete</a></td> --}}
                             <td>
-                                <form method="post" action="admin/loaitin/xoa" style="display:inline" id="theloai{{$item->id}}" onsubmit="return confirm('Bạn muốn xóa item {{$item->id}} ?')" >
+                                <form method="post" action="admin/loaitin/xoa" style="display:inline" id="theloai{{$item->id}}" onsubmit="return confirm('Bạn muốn xóa item {{$item->id}} không ?')" >
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-                                    <input name="delID" value="{{$item->id}}" type="hidden">
+                                    <input name="delID" value="{{$item->id}}" hidden>
                                     <button class="btn btn-primary btn-sm" type="submit">Delete</button>
                                 </form>
                             </td>
