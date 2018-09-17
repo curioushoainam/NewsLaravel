@@ -44,13 +44,32 @@ class TheloaiController extends Controller
     }
 
     public function postSua( Request $req, $id){
-    	viewArr($req->toArray());
-    	echo 'id -> '.$id;
+    	$this->validate($req,                  // [] : error; [] : error message
+            [
+                'Ten'=>'required|min:3|max:100|unique:TheLoai,Ten'
+            ],
+            [
+                'Ten.required' => 'Tên thể loại phải có độ dài từ 3 đến 100 ký tự',
+                'Ten.min'=>'Tên thể loại phải có độ dài từ 3 đến 100 ký tự',
+                'Ten.max'=>'Tên thể loại phải có độ dài từ 3 đến 100 ký tự',
+                'Ten.unique'=>'Tên thể loại đã được dùng'
+            ]
+        );      // a variable 'errors' is sent along with to the page respectively
 
-    	// $theloai = TheLoai::find($id);
-    	
+        $theloai = TheLoai::find($id);
+        $theloai->Ten = $req->Ten;
+        $theloai->TenKhongDau = changeTitle($req->Ten);
+        $theloai->save();
+
+        return redirect('admin/theloai/sua/'.$id)->with('msg','Cập nhật #id '.$id.' thành công');    	
     }
 
+    public function postXoa(Request $req){
+        // echo $req->delID;
+        $theloai = TheLoai::find($req->delID);
+        $theloai->delete();
 
+        return redirect('admin/theloai/danhsach')->with('msg','Xóa #id '.$req->delID.' thành công');
+    }
 }
 

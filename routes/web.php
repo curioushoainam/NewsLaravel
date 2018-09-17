@@ -32,6 +32,8 @@ Route::group(['prefix'=>'admin'], function(){
 
 		Route::get('sua/{id}', 'TheloaiController@getSua');
 		Route::post('sua/{id}', 'TheloaiController@postSua');
+
+		Route::post('xoa', 'TheloaiController@postXoa');		
 	});
 
 	Route::group(['prefix'=>'loaitin'], function(){

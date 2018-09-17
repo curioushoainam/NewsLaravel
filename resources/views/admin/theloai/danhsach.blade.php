@@ -10,6 +10,9 @@
                     <small>List</small>
                 </h1>
             </div>
+
+             {!! message( session('msg') ) !!}
+             
             <!-- /.col-lg-12 -->
             <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                 <thead>
@@ -27,7 +30,14 @@
                             <td>{{$item->id}}</td>
                             <td>{{$item->Ten}}</td>
                             <td>{{$item->TenKhongDau}}</td>
-                            <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href=""> Delete</a></td>
+                            {{-- <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href=""> Delete</a></td> --}}
+                            <td class="center">
+                                <form action="admin/theloai/xoa" method="post" onclick="return confirm('Bạn có muốn xóa #id {{$item->id}} không ?')">
+                                    <input type="hidden" name="_token" value="{{csrf_token()}}">
+                                    <input type="number" name="delID" value="{{$item->id}}" hidden>
+                                    <button class="btn btn-primary btn-sm" type="submit">Delete</button>
+                                </form>
+                            </td>
                             <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="admin/theloai/sua/{{$item->id}}">Edit</a></td>
                         </tr>  
                     @endforeach                 
