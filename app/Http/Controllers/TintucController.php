@@ -4,20 +4,36 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use \App\TinTuc;
+use \App\TheLoai;
+use \App\LoaiTin;
 
 class TintucController extends Controller
 {
     //
-    public function getDanhsach(){
-    	return view('admin.tintuc.danhsach');
+    public function getDanhsach(){ 
+        $tintuc = TinTuc::orderBy('id','DESC')->get();
+        
+        return view('admin.tintuc.danhsach', ['tintuc'=>$tintuc]);
     }
 
-    public function excThem(){
-    	return view('admin.tintuc.them');
+    public function getThem(){
+        
     }
 
-    public function excSua(){
-    	return view('admin.tintuc.sua');
+    public function postThem(Request $req){
+
+    }
+
+    public function getSua($id){
+        
+    }
+
+    public function postSua( Request $req, $id){
+
+    }
+
+    public function postXoa(Request $req){
+        viewArr($req->toArray());
     }
 
 }
