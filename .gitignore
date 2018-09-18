@@ -3,6 +3,7 @@
 /public/storage
 /public/upload
 /resources/views/giao_dien_admin
+/resources/views/giao_dien_trang_user
 /storage/*.key
 /vendor
 /.idea
