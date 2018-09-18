@@ -110,6 +110,5 @@ Route::group(['prefix'=>'admin', 'middleware'=>'AdminLogin'], function(){
 
 // ==================================================================
 // user pages
-Route::get('trangchu', function(){
-	return view('pages.trangchu');
-});
+Route::get('trangchu', 'PagesController@getTrangchu');
+Route::get('lienhe', 'PagesController@getLienhe');
