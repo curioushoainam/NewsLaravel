@@ -7,6 +7,7 @@ use \App\TinTuc;
 use \App\TheLoai;
 use \App\LoaiTin;
 use \App\Comment;
+use \App\Slide;
 
 class AjaxController extends Controller
 {
@@ -36,6 +37,16 @@ class AjaxController extends Controller
     public function getXoaComment($delID){     
         $comment = Comment::find($delID);
         $result = $comment->delete();
+        if($result)
+            echo json_encode(array('result'=>'done'));
+        else
+            echo json_encode(array('result'=>'failed'));
+        
+    }
+
+    public function getXoaSlide($delID){     
+        $slide = Slide::find($delID);
+        $result = $slide->delete();        
         if($result)
             echo json_encode(array('result'=>'done'));
         else

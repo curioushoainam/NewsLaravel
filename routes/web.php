@@ -65,8 +65,14 @@ Route::group(['prefix'=>'admin'], function(){
 	Route::group(['prefix'=>'slide'], function(){
 		// admin/slide/danhsach
 		Route::get('danhsach', 'SlideController@getDanhsach');
-		Route::get('them', 'SlideController@excThem');
-		Route::get('sua', 'SlideController@excSua');
+
+		Route::get('them', 'SlideController@getThem');
+		Route::post('them', 'SlideController@postThem');
+
+		Route::get('sua/{id}', 'SlideController@getSua');
+		Route::post('sua/{id}', 'SlideController@postSua');
+
+		Route::post('xoa', 'SlideController@postXoa');
 	});
 
 	Route::group(['prefix'=>'user'], function(){
@@ -83,6 +89,8 @@ Route::group(['prefix'=>'admin'], function(){
 		Route::get('xoatintuc/{delID}', 'AjaxController@getXoaTinTuc');
 
 		Route::get('comment/{delID}', 'AjaxController@getXoaComment');
+
+		Route::get('xoaslide/{delID}', 'AjaxController@getXoaSlide');
 	});
 
 
