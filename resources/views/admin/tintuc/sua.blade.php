@@ -71,7 +71,7 @@
                    
                     <div class="form-group">
                         <label>Hình</label>
-                        <p><img src="public/upload/tintuc/{{$tintuc->Hinh}}" alt=""></p>
+                        <p><img src="public/upload/tintuc/{{$tintuc->Hinh}}" alt="" width="300px"></p>
                         <input name="Hinh" type="file">
                     </div>
                      {!! error( session('error') ) !!}
@@ -100,6 +100,41 @@
             </div>
         </div>
         <!-- /.row -->
+
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Bình luận
+                    <small>Danh sách</small>
+                </h1>
+            </div>
+            <!-- /.col-lg-12 -->
+
+            {!! message(session('msg')) !!}                       
+
+            <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                <thead>
+                    <tr align="center">
+                        <th>ID</th>
+                        <th>Người dùng</th>                                               
+                        <th>Nội dung</th>
+                        <th>Ngày đăng</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($tintuc->comment as $cm)
+                    <tr class="odd gradeX" align="center" id="cm{{$cm->id}}">
+                        <td>{{$cm->id}}</td> 
+                        <td>{{$cm->user->name}}</td>
+                        <td>{{$cm->NoiDung}}</td>
+                        <td>{{$cm->created_at}}</td>
+                        <td><button class="btn btn-primary btn-sm delcm" data-delID="{{$cm->id}}" type="button" >Delete</button></td>                        
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+        <!-- /.row -->
     </div>
     <!-- /.container-fluid -->
 </div>
@@ -118,5 +153,17 @@
             });    
         });
     });
+
+    $(document).on('click','.delcm',function(){
+        _that = $(this);       
+        $.get("./admin/ajax/comment/"+_that.data("delid"), function(data){
+            var _data = JSON.parse(data);
+            if(_data.result == "done")
+                $("#cm"+_that.data("delid")).remove();
+            else
+                alert('Delete comment #id '+_that.data("delid") +' thất bại. Xin thử lại');
+        });
+    });
+
 </script>
 @endsection

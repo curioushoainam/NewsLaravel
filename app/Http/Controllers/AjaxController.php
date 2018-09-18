@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use \App\TinTuc;
 use \App\TheLoai;
 use \App\LoaiTin;
+use \App\Comment;
 
 class AjaxController extends Controller
 {
@@ -17,14 +18,14 @@ class AjaxController extends Controller
             echo "<option value='". $lt->id ."'>". $lt->Ten ."</option>";        
     }
 
-     public function getXoaTinTuc($delID){ 
+    public function getXoaTinTuc($delID){ 
      	if(isset($delID) && $delID) {
      		$tintuc = TinTuc::find($delID); 
 	        // $file = 'public/upload/tintuc/'.$tintuc->Hinh;
 	        // if (file_exists($file)) {
 	        //     unlink($file);
 	        // } 
-	        // $tintuc->delete();        
+	        $tintuc->delete();        
 	        echo json_encode(array('result'=>'done'));
      	} else {
      		echo json_encode(array('result'=>'failed'));
@@ -32,5 +33,13 @@ class AjaxController extends Controller
                 
     }
 
-    
+    public function getXoaComment($delID){     
+        $comment = Comment::find($delID);
+        $result = $comment->delete();
+        if($result)
+            echo json_encode(array('result'=>'done'));
+        else
+            echo json_encode(array('result'=>'failed'));
+        
+    }
 }
