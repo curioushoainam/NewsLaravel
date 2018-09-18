@@ -8,18 +8,19 @@
     <meta name="author" content="">
 
     <title>Admin - Khoa Phạm</title>
-
+    
+    <base href="{{asset('')}}">
     <!-- Bootstrap Core CSS -->
-    <link href="admin_asset/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="public/admin_asset/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- MetisMenu CSS -->
-    <link href="admin_asset/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+    <link href="public/admin_asset/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="admin_asset/dist/css/sb-admin-2.css" rel="stylesheet">
+    <link href="public/admin_asset/dist/css/sb-admin-2.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="admin_asset/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="public/admin_asset/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
 </head>
 
@@ -30,11 +31,14 @@
             <div class="col-md-4 col-md-offset-4">
                 <div class="login-panel panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Please Sign In</h3>
+                        <h3 class="panel-title">Đăng nhập</h3>
                     </div>
                     <div class="panel-body">
-                        <form role="form" action="" method="POST">
+                        {!! errAlert($errors->all()) !!}
+                        {!! error(session('error')) !!}
+                        <form role="form" action="admin/dangnhap" method="POST">
                             <fieldset>
+                                <input type="hidden" name="_token" value="{{csrf_token()}}">
                                 <div class="form-group">
                                     <input class="form-control" placeholder="E-mail" name="email" type="email" autofocus>
                                 </div>
@@ -51,16 +55,16 @@
     </div>
 
     <!-- jQuery -->
-    <script src="admin_asset/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="public/admin_asset/bower_components/jquery/dist/jquery.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="admin_asset/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="public/admin_asset/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
     <!-- Metis Menu Plugin JavaScript -->
-    <script src="admin_asset/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+    <script src="public/admin_asset/bower_components/metisMenu/dist/metisMenu.min.js"></script>
 
     <!-- Custom Theme JavaScript -->
-    <script src="admin_asset/dist/js/sb-admin-2.js"></script>
+    <script src="public/admin_asset/dist/js/sb-admin-2.js"></script>
 
 </body>
 

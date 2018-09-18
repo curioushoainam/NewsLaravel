@@ -20,7 +20,7 @@
                         <th>ID</th>
                         <th>Tên</th>                                               
                         <th>Hình</th>
-                        <th>Linh</th>
+                        <th>Link</th>
                         <th>Ngày tạo</th>
                         <th>Cập nhật</th>                        
                         <th>Delete</th>

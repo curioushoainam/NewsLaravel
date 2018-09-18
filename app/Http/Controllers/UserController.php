@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 use \App\User;
 
 class UserController extends Controller
@@ -87,6 +89,34 @@ class UserController extends Controller
         $user->save();
 
         return redirect('admin/user/sua/'.$id)->with('msg','Cập nhật user '.$id.' thành công');
+    }
+
+    public function getDangnhapAdmin(){
+        return view('admin.login');
+    }
+
+     public function postDangnhapAdmin(Request $req){
+        $this->validate($req, [
+                'email'=>'required',
+                'password'=>'required|min:6|max:25'
+            ],[
+                'email.required'=>'Bạn chưa nhập email',
+                'password.required|min:6|max:25'=>'Bạn chưa nhập mật khẩu',
+                'password.min'=>'Mật khẩu có tối thiểu là 6 ký tự',
+                'password.max'=>'Mật khẩu có tối đa là 25 ký tự'
+            ]
+        );
+
+        if(Auth::attempt(['email'=>$req->email,'password'=>$req->password])){
+            return redirect('admin/user/danhsach');
+        } else {
+            return redirect('admin/dangnhap')->with('error','Tài khoản hoặc mật khẩu không đúng');
+        }
+    }
+
+    public function getDangxuatAdmin(){
+        Auth::logout();
+        return redirect('admin/dangnhap');
     }
 
 }

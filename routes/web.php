@@ -22,6 +22,10 @@ Route::get('page', 'myController@demopage');
 
 // =========================================================
 // routes for admin
+Route::get('admin/dangnhap','UserController@getDangnhapAdmin');
+Route::post('admin/dangnhap','UserController@postDangnhapAdmin');
+Route::get('admin/dangxuat','UserController@getDangxuatAdmin');
+
 Route::group(['prefix'=>'admin'], function(){
 	Route::group(['prefix'=>'theloai'], function(){
 		// admin/theloai/danhsach
