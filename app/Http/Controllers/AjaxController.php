@@ -8,6 +8,7 @@ use \App\TheLoai;
 use \App\LoaiTin;
 use \App\Comment;
 use \App\Slide;
+use \App\User;
 
 class AjaxController extends Controller
 {
@@ -47,6 +48,16 @@ class AjaxController extends Controller
     public function getXoaSlide($delID){     
         $slide = Slide::find($delID);
         $result = $slide->delete();        
+        if($result)
+            echo json_encode(array('result'=>'done'));
+        else
+            echo json_encode(array('result'=>'failed'));
+        
+    }
+
+    public function getXoaUser($delID){     
+        $user = User::find($delID);
+        $result = $user->delete();        
         if($result)
             echo json_encode(array('result'=>'done'));
         else

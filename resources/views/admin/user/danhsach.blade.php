@@ -10,35 +10,30 @@
                     <small>List</small>
                 </h1>
             </div>
-            <!-- /.col-lg-12 -->
+            <!-- /.col-lg-12 -->  
             <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                 <thead>
                     <tr align="center">
                         <th>ID</th>
                         <th>Name</th>
-                        <th>Category Parent</th>
-                        <th>Status</th>
+                        <th>Email</th>
+                        <th>Level</th>
                         <th>Delete</th>
                         <th>Edit</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="odd gradeX" align="center">
-                        <td>1</td>
-                        <td>Tin Tức</td>
-                        <td>None</td>
-                        <td>Hiện</td>
-                        <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="#"> Delete</a></td>
-                        <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="#">Edit</a></td>
-                    </tr>
-                    <tr class="even gradeC" align="center">
-                        <td>2</td>
-                        <td>Bóng Đá</td>
-                        <td>Thể Thao</td>
-                        <td>Ẩn</td>
-                        <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="#"> Delete</a></td>
-                        <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="#">Edit</a></td>
-                    </tr>
+                    @foreach ($user as $us)
+                        <tr class="odd gradeX" align="center" id="user{{$us->id}}">
+                            <td>{{$us->id}}</td>
+                            <td>{{$us->name}}</td>
+                            <td>{{$us->email}}</td>
+                            <td>{{$us->level}}</td>
+                            <td><button class="btn btn-primary btn-sm deluser" data-delid="{{$us->id}}" type="button" >Delete</button></td>
+                            <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="admin/user/sua/{{$us->id}}">Edit</a></td>
+                        </tr>
+                    @endforeach
+                   
                 </tbody>
             </table>
         </div>
@@ -47,5 +42,25 @@
     <!-- /.container-fluid -->
 </div>
 <!-- /#page-wrapper -->
+
+@endsection
+
+@section('script')
+    <script>
+        $(document).ready(function(){
+            $(document).on('click','.deluser',function(){
+                _that = $(this);
+                var delID = _that.data('delid');
+                // alert(delID);
+                $.get("./admin/ajax/xoauser/"+ delID, function(data){
+                    _data = JSON.parse(data);
+                    if(_data.result = "done")
+                        $("#user"+delID).remove();
+                    else
+                        alert('Delete #id '+delID+' thất bại.' );
+                });
+            });            
+        });
+    </script>
 
 @endsection
