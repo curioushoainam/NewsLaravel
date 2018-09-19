@@ -112,3 +112,9 @@ Route::group(['prefix'=>'admin', 'middleware'=>'AdminLogin'], function(){
 // user pages
 Route::get('trangchu', 'PagesController@getTrangchu');
 Route::get('lienhe', 'PagesController@getLienhe');
+Route::get('tintuc/{id}/{TieuDeKhongDau}.html', 'PagesController@getTintuc');
+
+Route::get('login', 'PagesController@getLogin');
+Route::post('login', 'PagesController@postLogin');
+
+Route::get('logout', 'PagesController@getLogout');
