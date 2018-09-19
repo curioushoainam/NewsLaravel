@@ -126,3 +126,5 @@ Route::post('nguoidung','PagesController@postNguoidung');
 
 Route::get('register','PagesController@getDangky');
 Route::post('register','PagesController@postDangky');
+
+Route::get('search','PagesController@postSearch');

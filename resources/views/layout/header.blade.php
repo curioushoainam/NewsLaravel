@@ -22,9 +22,10 @@
                 </li>
             </ul>
 
-            <form class="navbar-form navbar-left" role="search">
+            <form class="navbar-form navbar-left" role="search" method="get" action="search">
+                <input type="hidden" name="_token" value="{{csrf_token()}}">
 		        <div class="form-group">
-		          <input type="text" class="form-control" placeholder="Search">
+		          <input type="text" class="form-control" placeholder="Search" name="keyword">
 		        </div>
 		        <button type="submit" class="btn btn-default">Submit</button>
 		    </form>

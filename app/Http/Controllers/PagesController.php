@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
 use \App\TheLoai;
 use \App\Slide;
 use \App\TinTuc;
@@ -158,6 +159,14 @@ class PagesController extends Controller
         $user->save();
 
         return redirect('register')->with('msg','Chúc mừng bạn đã đăng ký thành công');
+    }
+
+    function postSearch(Request $req){
+		$keyword = $req->keyword;
+		$tintuc = TinTuc::where('TieuDe','like',"% $keyword %")->orWhere('TomTat','like',"% $keyword %")->orWhere('NoiDung','like',"% $keyword %")->orderByDesc('id')->paginate(10)->appends(['keyword' => $keyword]);
+		$count = count(TinTuc::where('TieuDe','like',"% $keyword %")->orWhere('TomTat','like',"% $keyword %")->orWhere('NoiDung','like',"% $keyword %")->get());
+		
+    	return view('pages.timkiem',['tintuc'=>$tintuc,'keyword'=>$keyword,'count'=>$count]);
     }
 
 }
