@@ -7,6 +7,7 @@ use \App\TheLoai;
 use \App\Slide;
 use \App\TinTuc;
 use \App\LoaiTin;
+use \App\Comment;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -66,5 +67,23 @@ class PagesController extends Controller
     function getLogout(){
     	Auth::logout();
     	return redirect('trangchu');
+    }
+
+    function postComment(Request $req, $idTinTuc){
+    	$this->validate($req,[
+    			'NoiDung'=>'required|min:3'
+    		],[
+    			'NoiDung.required'=>'Bạn chưa nhập nội dung bình luận',
+    			'NoiDung.min'=>'Nội dung phải có tối thiểu 3 ký tự'
+    		]
+    	);
+
+    	$comment = new Comment();
+    	$comment->idUser = Auth::user()->id;
+    	$comment->idTinTuc = $idTinTuc;
+    	$comment->NoiDung = $req->NoiDung;
+    	$comment->save();
+    	$tintuc = TinTuc::find($idTinTuc);
+    	return redirect('tintuc/'.$idTinTuc.'/'.$tintuc->TieuDeKhongDau.'.html')->with('msg','Bạn đã gửi bình luận thành công');
     }
 }

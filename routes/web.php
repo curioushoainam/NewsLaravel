@@ -118,3 +118,5 @@ Route::get('login', 'PagesController@getLogin');
 Route::post('login', 'PagesController@postLogin');
 
 Route::get('logout', 'PagesController@getLogout');
+
+Route::post('tintuc/comment/{idTinTuc}', 'PagesController@postComment');
