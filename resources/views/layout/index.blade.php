@@ -33,7 +33,7 @@
 
 	@include('layout./header')
 
-	@yield('content')
+	@yield('content')    
 
 	@include('layout.footer')
     <!-- jQuery -->
