@@ -123,3 +123,6 @@ Route::post('tintuc/comment/{idTinTuc}', 'PagesController@postComment');
 
 Route::get('nguoidung','PagesController@getNguoidung');
 Route::post('nguoidung','PagesController@postNguoidung');
+
+Route::get('register','PagesController@getDangky');
+Route::post('register','PagesController@postDangky');

@@ -8,6 +8,7 @@ use \App\Slide;
 use \App\TinTuc;
 use \App\LoaiTin;
 use \App\Comment;
+use \App\User;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -122,4 +123,42 @@ class PagesController extends Controller
         $user->save();
         return redirect('nguoidung')->with('msg','Cập nhật thành công');   	
     }
+
+    function getDangky(){
+    	return view('pages.register');
+    }
+
+    function postDangky(Request $req){
+    	$this->validate($req, [
+                'name'=>'required|min:3|max:255',
+                'email'=>'required|unique:users,email',
+                'password'=>'required|min:6|max:25',
+                'repassword'=>'required|same:password',                
+            ],[
+                'name.required'=>'Bạn chưa nhập tên',
+                'name.min'=>'Tên phải có từ 3 đến 255 ký tự',
+                'name.max'=>'Tên phải có từ 3 đến 255 ký tự',
+
+                'email.required'=>'Bạn chưa nhập email',
+                'email.unique'=>'email đã được sử dụng',
+
+                'password.required'=>'Bạn chưa nhập passowrd',
+                'password.min'=>'Password phải có từ 6 đến 25 ký tự',
+                'password.max'=>'Password phải có từ 6 đến 25 ký tự',
+
+                'repassword.required'=>'Bạn chưa nhập lại passowrd',
+                'repassword.same'=>'Bạn nhập lại password không khớp'
+            ]
+        );
+        $user = new User();
+        $user->name = $req->name;
+        $user->email = $req->email;
+        $user->password = bcrypt($req->password);
+        $user->level = 0;
+        $user->save();
+
+        return redirect('register')->with('msg','Chúc mừng bạn đã đăng ký thành công');
+    }
+
 }
+
