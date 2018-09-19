@@ -169,5 +169,13 @@ class PagesController extends Controller
     	return view('pages.timkiem',['tintuc'=>$tintuc,'keyword'=>$keyword,'count'=>$count]);
     }
 
+    function getLoaitin($unsigned_name){
+    	// first dùng để lấy một dữ liệu duy nhất, get dùng để lấy nhiều dòng dữ liệu.
+    	$loaitin = LoaiTin::where('TenKhongDau',$unsigned_name)->first();
+    	$tintuc = TinTuc::where('idLoaiTin',$loaitin->id)->orderByDesc('id')->paginate(10);
+
+    	return view('pages.loaitin',['tintuc'=>$tintuc, 'loaitin'=>$loaitin]);
+    }
+
 }
 

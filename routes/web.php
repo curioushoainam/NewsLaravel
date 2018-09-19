@@ -128,3 +128,5 @@ Route::get('register','PagesController@getDangky');
 Route::post('register','PagesController@postDangky');
 
 Route::get('search','PagesController@postSearch');
+
+Route::get('loaitin/{unsigned_name}','PagesController@getLoaitin');

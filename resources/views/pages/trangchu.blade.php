@@ -24,9 +24,9 @@
 	            		<!-- item -->
 					    <div class="row-item row">
 		                	<h3>
-		                		<a href="trangchu">{{$tl->Ten}}</a> | 	
+		                		<a>{{$tl->Ten}}</a> | 	
 								@foreach($tl->loaitin as $lt)
-		                		<small><a href="trangchu"><i>{{$lt->Ten}}</i></a> |</small>
+		                		<small><a href="loaitin/{{$lt->TenKhongDau}}"><i>{{$lt->Ten}}</i></a> |</small>
 		                		@endforeach
 		                	</h3>
 
