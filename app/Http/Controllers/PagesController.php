@@ -86,4 +86,40 @@ class PagesController extends Controller
     	$tintuc = TinTuc::find($idTinTuc);
     	return redirect('tintuc/'.$idTinTuc.'/'.$tintuc->TieuDeKhongDau.'.html')->with('msg','Bạn đã gửi bình luận thành công');
     }
+
+    function getNguoidung(){
+    	return view('pages.nguoidung');
+    }
+
+    function postNguoidung(Request $req){
+    	$this->validate($req, [
+                'name'=>'required|min:3|max:255',                
+            ],[
+                'name.required'=>'Bạn chưa nhập tên',
+                'name.min'=>'Tên phải có từ 3 đến 255 ký tự',
+                'name.max'=>'Tên phải có từ 3 đến 255 ký tự'
+            ]
+        );
+        $user = Auth::user();
+        $user->name = $req->name;        
+
+        if($req->changePassword == 'on'){
+            $this->validate($req, [                    
+                    'password'=>'required|min:6|max:25',
+                    'repassword'=>'required|same:password'                    
+                ],[                    
+                    'password.required'=>'Bạn chưa nhập passowrd',
+                    'password.min'=>'Password phải có từ 6 đến 25 ký tự',
+                    'password.max'=>'Password phải có từ 6 đến 25 ký tự',
+
+                    'repassword.required'=>'Bạn chưa nhập lại passowrd',
+                    'repassword.same'=>'Bạn nhập lại password không khớp'
+                ]
+            );            
+            $user->password = bcrypt($req->password);
+        }
+
+        $user->save();
+        return redirect('nguoidung')->with('msg','Cập nhật thành công');   	
+    }
 }
